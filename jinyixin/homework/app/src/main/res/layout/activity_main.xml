@@ -1,0 +1,73 @@
+ <LinearLayout
+   xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    android:orientation="vertical"
+    android:paddingEnd="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    tools:context=".MainActivity">
+
+
+<View
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:background="@drawable/banner" />
+
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="382dp"
+    android:scaleType="fitXY"
+    android:src="@drawable/background" />
+
+<ImageView
+         android:layout_width="match_parent"
+         android:layout_height="30dp"
+         android:scaleType="fitXY"
+         android:src="@drawable/jindutiao" />
+
+
+<LinearLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:orientation="horizontal">
+
+<Button
+    android:layout_width="0dp"
+    android:layout_height="70dp"
+    android:background="@drawable/button1"
+    android:layout_weight="0.75"/>
+
+<Button
+    android:layout_width="0dp"
+    android:layout_height="70dp"
+    android:background="@drawable/button2"
+    android:layout_weight="1"/>
+
+<Button
+     android:layout_width="0dp"
+     android:layout_height="70dp"
+     android:background="@drawable/button3"
+     android:layout_weight="1.25"/>
+
+<Button
+     android:layout_width="0dp"
+     android:layout_height="70dp"
+     android:background="@drawable/button4"
+     android:layout_weight="1"/>
+
+<Button
+    android:layout_width="0dp"
+    android:layout_height="70dp"
+    android:background="@drawable/button5"
+    android:layout_weight="0.75"/>
+
+    </LinearLayout>
+
+
+
+
+ </LinearLayout>
