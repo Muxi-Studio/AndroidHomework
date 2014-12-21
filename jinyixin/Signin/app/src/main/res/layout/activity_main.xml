@@ -6,8 +6,6 @@
     android:background="#2B2B2B"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
 <LinearLayout
@@ -48,6 +46,7 @@
         android:background="@color/bg"
         android:password="true"
         android:textSize="@dimen/info"
+        android:maxLength="10"
         android:id="@+id/key" />
     <TextView
         android:layout_height="wrap_content"
@@ -61,6 +60,9 @@
         android:layout_height="wrap_content"
         android:background="@color/bg"
         android:textSize="@dimen/info"
+        android:inputType="number"
+        android:phoneNumber="true"
+        android:maxLength="11"
         android:id="@+id/phone" />
 
     <TextView
@@ -69,11 +71,12 @@
         android:text="Birthday"
         android:textColor="@color/bg"
         android:textSize="@dimen/info"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:weightSum="3">
+
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="0dp"
@@ -96,40 +99,44 @@
             android:textColor="@color/bg"
             android:textSize="@dimen/info"/>
 
-        </LinearLayout>
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="3">
 
-        <NumberPicker
+    <NumberPicker
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/year">
+    </NumberPicker>
+
+    <NumberPicker
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/year">
-        </NumberPicker>
+            android:id="@+id/month"
+        android:orientation="vertical">
+    </NumberPicker>
 
-        <NumberPicker
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/month">
-        </NumberPicker>
-
-        <NumberPicker
+    <NumberPicker
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/day">
-        </NumberPicker>
+    </NumberPicker>
 
-        </LinearLayout>
+   </LinearLayout>
 
-
-
-
-
+    <Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Submit"
+    android:textSize="@dimen/info"
+    android:id="@+id/submit"/>
 
 </LinearLayout>
 
