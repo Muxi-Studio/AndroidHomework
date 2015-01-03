@@ -19,10 +19,10 @@ public class ProjectNameDao {
         db = DatabaseHelper.getInstance(context);
     }
 
-    public void insertDiary(String title, String content, String date) {
+    public void insertDiary(String title, String content) {
         String insertDiarySQL = "INSERT INTO " + DatabaseHelper.TABLE_DIARY
-                + " VALUES (NULL, ?, ?, ?)";
-        db.execSQL(insertDiarySQL, new String[]{title, content, date});
+                + " VALUES (NULL, ?, ?)";
+        db.execSQL(insertDiarySQL, new String[]{title, content});
     }
 
     public List<Map<String, String>> loadDiary() {
@@ -38,8 +38,6 @@ public class ProjectNameDao {
                         cursor.getString(cursor.getColumnIndex(DatabaseHelper.KEY_DIARY_TITLE)));
                 map.put(DatabaseHelper.KEY_DIARY_CONTENT,
                         cursor.getString(cursor.getColumnIndex(DatabaseHelper.KEY_DIARY_CONTENT)));
-                map.put("date",
-                        cursor.getString(cursor.getColumnIndex(DatabaseHelper.KEY_DIARY_DATE)));
                 list.add(map);
             }
         }

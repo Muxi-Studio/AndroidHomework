@@ -15,9 +15,9 @@ import database.ProjectNameDao;
 
 public class MainContent extends ActionBarActivity {
 
-    Button button;
+    Button button2;
     EditText editText1,editText2;
-    //ProjectNameDao projectNameDao;
+    ProjectNameDao projectNameDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +33,27 @@ public class MainContent extends ActionBarActivity {
             }
         });
 
+        init();
     }
 
+    private void init() {
+        projectNameDao = new ProjectNameDao(this);
+
+        editText1 = (EditText) findViewById(R.id.title);
+        editText2 = (EditText) findViewById(R.id.item);
+        button2 = (Button) findViewById(R.id.button2);
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                save();
+            }
+        });
+    }
+    private void save(){
+        projectNameDao.insertDiary(editText1.getText().toString(),
+                editText2.getText().toString());
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
