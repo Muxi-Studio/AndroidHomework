@@ -1,7 +1,6 @@
-package com.muxi.diary.mainActicity;
-
-import android.content.Intent;
-import android.content.Loader;
+package com.muxi.no9.mainactivity;
+import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,70 +10,80 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.muxi.diary.R;
-
-import com.muxi.diary.database.DatabaseHelper;
-import com.muxi.diary.database.ProjectNameDao;
+import com.muxi.no9.R;
+import com.muxi.no9.database.DataBaseHelper;
+import com.muxi.no9.database.ProjectNameDao;
 
 import java.util.List;
 import java.util.Map;
 
-public class MainContent extends ActionBarActivity {
 
-    Button button2;
-    EditText editText1,editText2;
+public class MainActivity extends Activity {
+
+    EditText title, content, date;
+    TextView textView;
+    Button saveBtn, loadBtn;
     ProjectNameDao projectNameDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_content);
-
-        Button button =(Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainContent.this,MainActivity.class);
-                startActivity(intent);
-            }
-        });
+        setContentView(R.layout.activity_main);
 
         init();
+
     }
 
-    private void init() {
+    private void init(){
         projectNameDao = new ProjectNameDao(this);
 
-        editText1 = (EditText) findViewById(R.id.title);
-        editText2 = (EditText) findViewById(R.id.item);
+        textView = (TextView) findViewById(R.id.main_text);
+        title = (EditText) findViewById(R.id.main_title);
+        content = (EditText) findViewById(R.id.main_content);
+        date = (EditText) findViewById(R.id.main_date);
+        saveBtn = (Button) findViewById(R.id.main_save);
+        loadBtn = (Button) findViewById(R.id.main_read);
 
-        button2 = (Button) findViewById(R.id.button2);
-        button2.setOnClickListener(new View.OnClickListener() {
+        saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 save();
-                int a =1;
-                if (a==1) {
-                    load();
-                }
+            }
+        });
+
+        loadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                load();
             }
         });
     }
+
     private void save(){
-        projectNameDao.insertDiary(editText1.getText().toString(),
-                editText2.getText().toString());
+        //此处需要判断EditText是否为空，是否有非法数值
+        projectNameDao.insertDiary(title.getText().toString(),
+                content.getText().toString(),
+                date.getText().toString());
     }
 
     private void load(){
         List<Map<String, String>> list = projectNameDao.loadDiary();
+
         Map<String, String> map = list.get(0);
-        editText1.setText(map.get(DatabaseHelper.KEY_DIARY_TITLE));
+
+        //textView.setText(map.get("title"));
+        textView.setText(map.get(DataBaseHelper.KEY_DIARY_TITLE));
     }
+
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main_content, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

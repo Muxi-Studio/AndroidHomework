@@ -9,14 +9,10 @@ import android.widget.EditText;
 
 import com.muxi.diary.R;
 
-import database.ProjectNameDao;
-
 /**
  * Created by user on 2015/1/3.
  */
 public class MyAdapter extends BaseAdapter {
-
-    //ProjectNameDao projectNameDao;
 
     private Context context;
     private LayoutInflater layoutInflater;

@@ -15,8 +15,8 @@ import com.muxi.diary.R;
 import java.util.List;
 import java.util.Map;
 
-import database.DatabaseHelper;
-import database.ProjectNameDao;
+import com.muxi.diary.database.DatabaseHelper;
+import com.muxi.diary.database.ProjectNameDao;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -55,7 +55,7 @@ public class MainActivity extends ActionBarActivity {
         load();
     }
     private void load(){
-       List<Map<String ,String >> list = projectNameDao.loadDiary();
+        List<Map<String ,String >> list = projectNameDao.loadDiary();
         Map<String ,String > map = list.get(0);
         title.setText(map.get(DatabaseHelper.KEY_DIARY_TITLE));
         item.setText(map.get(DatabaseHelper.KEY_DIARY_CONTENT));
