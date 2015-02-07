@@ -20,17 +20,13 @@ import com.muxi.diary.database.ProjectNameDao;
 
 
 public class MainActivity extends ActionBarActivity {
-
-    private ListView listView;
-    private MyAdapter adapter;
-    ProjectNameDao projectNameDao;
-    EditText title,item;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ListView listView = (ListView) findViewById(R.id.list);
+        MyAdapter adapter = new MyAdapter(this);
         Button button =(Button)findViewById(R.id.newone);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,27 +36,9 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-    init();
-
-     listView = (ListView) findViewById(R.id.list);
-     adapter = new MyAdapter(this);
      listView.setAdapter(adapter);
 
     }
-
-    private void init() {
-        projectNameDao = new ProjectNameDao(this);
-        title = (EditText) findViewById(R.id.list_title);
-        item = (EditText) findViewById(R.id.list_item);
-        load();
-    }
-    private void load(){
-        List<Map<String ,String >> list = projectNameDao.loadDiary();
-        Map<String ,String > map = list.get(0);
-        title.setText(map.get(DatabaseHelper.KEY_DIARY_TITLE));
-        item.setText(map.get(DatabaseHelper.KEY_DIARY_CONTENT));
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

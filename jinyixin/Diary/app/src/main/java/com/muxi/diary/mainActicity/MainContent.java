@@ -22,7 +22,7 @@ import java.util.Map;
 public class MainContent extends ActionBarActivity {
 
     Button button2;
-    EditText editText1,editText2;
+    EditText editText1, editText2;
     ProjectNameDao projectNameDao;
 
     @Override
@@ -30,11 +30,11 @@ public class MainContent extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_content);
 
-        Button button =(Button)findViewById(R.id.button);
+        Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainContent.this,MainActivity.class);
+                Intent intent = new Intent(MainContent.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -52,23 +52,11 @@ public class MainContent extends ActionBarActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                save();
-                int a =1;
-                if (a==1) {
-                    load();
-                }
+                projectNameDao.insertDiary(editText1.getText().toString(),
+                        editText2.getText().toString());
+                finish();
             }
         });
-    }
-    private void save(){
-        projectNameDao.insertDiary(editText1.getText().toString(),
-                editText2.getText().toString());
-    }
-
-    private void load(){
-        List<Map<String, String>> list = projectNameDao.loadDiary();
-        Map<String, String> map = list.get(0);
-        editText1.setText(map.get(DatabaseHelper.KEY_DIARY_TITLE));
     }
 
     @Override

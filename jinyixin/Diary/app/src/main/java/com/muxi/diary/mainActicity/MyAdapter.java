@@ -8,6 +8,11 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 
 import com.muxi.diary.R;
+import com.muxi.diary.database.DatabaseHelper;
+import com.muxi.diary.database.ProjectNameDao;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by user on 2015/1/3.
@@ -16,10 +21,14 @@ public class MyAdapter extends BaseAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
+    List<Map<String ,String >> list;
 
     public MyAdapter(Context context){
         this.context=context;
-        layoutInflater = layoutInflater.from(context);
+        ProjectNameDao projectNameDao = new ProjectNameDao(context);
+
+        list = projectNameDao.loadDiary();
+        layoutInflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -49,13 +58,37 @@ public class MyAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        viewHolder.tittle.setText("tittle" + i);
-        viewHolder.content.setText("add content");
+        viewHolder.tittle.setText(getTitle(i,list));
+        viewHolder.content.setText(getContent(i,list));
         return view;
     }
-}
-class ViewHolder {
-    EditText tittle;
-    EditText content;
-}
+
+    class ViewHolder {
+        EditText tittle;
+        EditText content;
+    }
+    protected String getTitle(int i,List<Map<String, String>> list){
+        String tittle;
+        if (!list.isEmpty()){
+            Map<String ,String > map = list.get(i);
+            tittle = map.get(DatabaseHelper.KEY_DIARY_TITLE);
+            return tittle;
+        }else {
+           return null;
+        }
+        }
+
+    protected String getContent(int i,List<Map<String, String>> list){
+        String content;
+        if (!list.isEmpty()) {
+            Map<String, String> map = list.get(i);
+            content = map.get(DatabaseHelper.KEY_DIARY_CONTENT);
+            return content;
+        }else{
+            return null;
+        }
+    }
+
+    }
+
 
