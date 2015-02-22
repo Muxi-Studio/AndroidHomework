@@ -37,6 +37,9 @@ public class Activity2 extends ActionBarActivity {
         Intent receive = getIntent();
         Bundle bundle_receive=receive.getExtras();
         String username = bundle_receive.getString("name");
+        String tip = bundle_receive.getString("tip");
+        if(tip.equals("username"))
+        {
         final String path = "https://www.v2ex.com/api/members/show.json?username=" + username;
 
         Thread thread = new Thread(new Runnable() {
@@ -80,6 +83,51 @@ public class Activity2 extends ActionBarActivity {
 
         });
         thread.start();
+        }else {
+            final String path = "https://www.v2ex.com/api/members/show.json?id=" + username;
+
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    try {
+
+                        URL url = new URL(path);
+
+                        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                        httpURLConnection.setConnectTimeout(10000);
+
+                        httpURLConnection.setRequestMethod("GET");
+
+                        httpURLConnection.setRequestProperty("Accept-Charset", "UTF-8");
+                        httpURLConnection.setRequestProperty("Accept-Language", Locale.getDefault().toString());
+
+                        InputStream inputStream = httpURLConnection.getInputStream();
+
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                        String line = null;
+                        StringBuilder builder = new StringBuilder();
+                        while((line=bufferedReader.readLine()) != null)
+                        {
+                            builder.append(line);
+                        }
+                        temp = builder.toString();
+                        Log.i("result",temp);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                content.setText(temp);
+                            }
+                        });
+                    }catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            });
+            thread.start();
+        }
     }
 
 

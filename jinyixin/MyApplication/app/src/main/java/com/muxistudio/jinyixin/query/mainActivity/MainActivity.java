@@ -8,16 +8,28 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 
 import com.muxistudio.jinyixin.query.R;
 
 
 public class MainActivity extends ActionBarActivity {
 
+    private String tip;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                tip = checkedId == R.id.choose_name ?
+                                       "username":"id";
+            }
+        });
 
         Button button =(Button)findViewById(R.id.serach);
         button.setOnClickListener(new View.OnClickListener() {
@@ -27,6 +39,7 @@ public class MainActivity extends ActionBarActivity {
                 String username = editText.getText().toString();
                 Bundle bundle = new Bundle();
                 bundle.putString("name",username);
+                bundle.putString("tip",tip);
 
                 Intent intent = new Intent(MainActivity.this,Activity2.class);
 

@@ -26,10 +26,9 @@ android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:layout_marginTop="94dp"
-    android:layout_below="@+id/textView"
-    android:layout_alignLeft="@+id/banner"
-    android:layout_alignStart="@+id/banner">
+    android:layout_below="@+id/radioGroup"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true">
 
 
     <TextView
@@ -49,8 +48,10 @@ android:paddingRight="@dimen/activity_horizontal_margin"
         android:layout_height="wrap_content"
         android:id="@+id/username"
         android:hint="@string/username"
+        android:singleLine="false"
+        android:layout_alignTop="@+id/username_info"
         android:layout_toRightOf="@+id/username_info"
-        android:singleLine="false" />
+        android:layout_toEndOf="@+id/username_info" />
 
 </RelativeLayout>
 
@@ -70,12 +71,35 @@ android:paddingRight="@dimen/activity_horizontal_margin"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textColor="#fd000000"
-    android:textSize="29sp"
+    android:textSize="32sp"
     android:layout_marginTop="126dp"
     android:id="@+id/textView"
     android:layout_alignParentTop="true"
     android:layout_alignLeft="@+id/item"
     android:layout_alignStart="@+id/item" />
+
+<RadioGroup
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:id="@+id/radioGroup">
+
+<RadioButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/string1"
+    android:id="@+id/choose_name"
+   />
+<RadioButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/string2"
+    android:id="@+id/choose_id"
+     />
+
+</RadioGroup>
 
 
 </RelativeLayout>

@@ -7,10 +7,12 @@
     <string name="title_activity_activity2">Activity2</string>
     <string name="error">none</string>
 
-    <string name="hello_world">Please input the username!</string>
+    <string name="hello_world">Please input the username or ID!</string>
 
     <string name="serach">serach</string>
-    <string name="username">username</string>
+    <string name="username">username/ID</string>
 
     <string name="title_activity_main_activity2">MainActivity2</string>
+    <string name="string1">serach username</string>
+    <string name="string2">serach ID</string>
 </resources>
