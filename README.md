@@ -1,2 +1,4 @@
 # AndroidHomework
-use to push homework
+这个版本库用来提交每次的作业、任务
+> - 把这个repo fork到自己的版本库
+> - 以自己的名字建立一个文件夹，每次的代码放到这个文件夹下面
