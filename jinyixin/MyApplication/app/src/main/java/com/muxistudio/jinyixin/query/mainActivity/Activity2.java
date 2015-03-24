@@ -11,10 +11,10 @@ import android.widget.TextView;
 
 import com.muxistudio.jinyixin.query.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
+import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,10 +26,13 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.security.PrivateKey;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 
 public class Activity2 extends ActionBarActivity {
+
 
     private String temp;
     private TextView content;
@@ -39,18 +42,27 @@ public class Activity2 extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity2);
 
-        
+
+
         content = (TextView) findViewById(R.id.content);
-        Intent receive = getIntent();
+
+        Intent receive;
+        receive = getIntent();
+
         Bundle bundle_receive = receive.getExtras();
+
         String username = bundle_receive.getString("name");
+
         String tip = bundle_receive.getString("tip");
+
         final String path;
+
         if (tip.equals("username")) {
             path = "https://www.v2ex.com/api/members/show.json?username=" + username;
         } else {
             path = "https://www.v2ex.com/api/members/show.json?id=" + username;
         }
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -76,12 +88,59 @@ public class Activity2 extends ActionBarActivity {
                     while ((line = bufferedReader.readLine()) != null) {
                         builder.append(line);
                     }
+
                     temp = builder.toString();
                     Log.i("result", temp);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            content.setText(temp);
+//                            content.setText(temp);
+                            if(temp!=null) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(temp);
+                                    String status = jsonObject.optString("status");
+                                    int id = jsonObject.optInt("id");
+                                    String url = jsonObject.optString("url");
+                                    String usernames = jsonObject.optString("username");
+                                    String website = jsonObject.optString("website");
+                                    String twittwe = jsonObject.optString("twitter");
+                                    String psn = jsonObject.optString("psn");
+                                    String github = jsonObject.optString("github");
+                                    String btc = jsonObject.optString("btc");
+                                    String location = jsonObject.optString("location");
+                                    String tagline = jsonObject.optString("tagline");
+                                    String bio = jsonObject.optString("bio");
+                                    int created = jsonObject.optInt("created");
+                                    EditText editText1 = (EditText) findViewById(R.id.statue);
+                                    editText1.setText(status);
+                                    EditText editText2 = (EditText) findViewById(R.id.id);
+                                    editText2.setText(id+"");
+                                    EditText editText3 = (EditText) findViewById(R.id.url);
+                                    editText3.setText(url);
+                                    EditText editText4 = (EditText) findViewById(R.id.usernames);
+                                    editText4.setText(usernames);
+                                    EditText editText5 = (EditText) findViewById(R.id.website);
+                                    editText5.setText(website);
+                                    EditText editText6 = (EditText) findViewById(R.id.twitter);
+                                    editText6.setText(twittwe);
+                                    EditText editText7 = (EditText) findViewById(R.id.psn);
+                                    editText7.setText(psn);
+                                    EditText editText8 = (EditText) findViewById(R.id.github);
+                                    editText8.setText(github);
+                                    EditText editText9 = (EditText) findViewById(R.id.btc);
+                                    editText9.setText(btc);
+                                    EditText editText10 = (EditText) findViewById(R.id.location);
+                                    editText10.setText(location);
+                                    EditText editText11 = (EditText) findViewById(R.id.tagline);
+                                    editText11.setText(tagline);
+                                    EditText editText12 = (EditText) findViewById(R.id.bio);
+                                    editText12.setText(bio);
+
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
                         }
                     });
 
@@ -93,59 +152,11 @@ public class Activity2 extends ActionBarActivity {
         });
         thread.start();
 
-//        JSONObject jsonObject = null;
-//        try {
-//            jsonObject = new JSONObject(temp);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            assert jsonObject != null;
-//            String statue1 = jsonObject.getString("statue");
-//            int id1 = jsonObject.getInt("id");
-//            String url1 = jsonObject.getString("url");
-//            String usernames1 = jsonObject.getString("username");
-//            String website1 = jsonObject.getString("website");
-//            String twitter1 = jsonObject.getString("twitter");
-//            String psn1 = jsonObject.getString("psn");
-//            String github1 = jsonObject.getString("github");
-//            String btc1 = jsonObject.getString("btc");
-//            String location1 = jsonObject.getString("location");
-//            String tagline1 = jsonObject.getString("tagline");
-//            String bio1 = jsonObject.getString("bio");
-//            String avatar_mini1 = jsonObject.getString("avatar_mini");
-//            EditText statue = (EditText) findViewById(R.id.statue);
-//            EditText id = (EditText) findViewById(R.id.id);
-//            EditText url = (EditText) findViewById(R.id.url);
-//            EditText usernames = (EditText) findViewById(R.id.usernames);
-//            EditText website = (EditText) findViewById(R.id.website);
-//            EditText twitter = (EditText) findViewById(R.id.twitter);
-//            EditText psn = (EditText) findViewById(R.id.psn);
-//            EditText github = (EditText) findViewById(R.id.github);
-//            EditText btc = (EditText) findViewById(R.id.btc);
-//            EditText location = (EditText) findViewById(R.id.location);
-//            EditText tagline = (EditText) findViewById(R.id.tagline);
-//            EditText bio = (EditText) findViewById(R.id.bio);
-//            EditText avatar_mini = (EditText) findViewById(R.id.avatar_mini);
-//            statue.setText(statue1);
-//            id.setText(id1);
-//            url.setText(url1);
-//            usernames.setText(usernames1);
-//            website.setText(website1);
-//            twitter.setText(twitter1);
-//            psn.setText(psn1);
-//            github.setText(github1);
-//            btc.setText(btc1);
-//            location.setText(location1);
-//            tagline.setText(tagline1);
-//            bio.setText(bio1);
-//            avatar_mini.setText(avatar_mini1);
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
 
-        //content.setText(temp);
+
+
+
+
 
     }
 

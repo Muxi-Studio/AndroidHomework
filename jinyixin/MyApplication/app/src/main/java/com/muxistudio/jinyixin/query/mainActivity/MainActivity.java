@@ -13,6 +13,7 @@ import android.widget.RadioGroup;
 import com.muxistudio.jinyixin.query.R;
 
 
+
 public class MainActivity extends ActionBarActivity {
 
     private String tip;
@@ -31,18 +32,18 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+
         Button button =(Button)findViewById(R.id.serach);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText editText = (EditText) findViewById(R.id.username);
-                String username = editText.getText().toString();
+                EditText editText = (EditText) findViewById(R.id.username_or_id);
+                String path = editText.getText().toString();
                 Bundle bundle = new Bundle();
-                bundle.putString("name",username);
+                bundle.putString("path",path);
                 bundle.putString("tip",tip);
 
                 Intent intent = new Intent(MainActivity.this,Activity2.class);
-
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

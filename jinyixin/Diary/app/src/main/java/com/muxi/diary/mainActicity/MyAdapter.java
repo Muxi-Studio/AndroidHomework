@@ -33,7 +33,7 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 100;
+        return list.size();
     }
 
     @Override

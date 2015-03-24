@@ -46,7 +46,7 @@ android:paddingRight="@dimen/activity_horizontal_margin"
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/username"
+        android:id="@+id/username_or_id"
         android:hint="@string/username"
         android:singleLine="false"
         android:layout_alignTop="@+id/username_info"
